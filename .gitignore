@@ -1,0 +1,20 @@
+# Secrets — JANGAN PERNAH commit file-file ini
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.json.keystore
+agent.json
+keystore.json
+session-wallets/
+.flop/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build / state (hasil run lokal, bukan kode)
+state/
+*.log
+.DS_Store

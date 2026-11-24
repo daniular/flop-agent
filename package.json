@@ -1,0 +1,28 @@
+{
+  "name": "flop-agent",
+  "version": "0.1.0",
+  "description": "Agen FLOP gratis untuk testnet Flop Labs: cek gateway, enroll wallet, dan kirim inference pertama. Devnet dulu, siap pindah ke testnet saat resmi dibuka.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "health": "node scripts/health.mjs",
+    "enroll": "node scripts/enroll.mjs",
+    "faucet": "node scripts/faucet.mjs",
+    "chat": "node scripts/chat.mjs",
+    "session": "node scripts/session.mjs"
+  },
+  "dependencies": {
+    "@flop-labs/client": "0.2.2",
+    "@flop-labs/contracts": "0.1.2",
+    "@flop-labs/sdk": "0.7.1",
+    "@polkadot/api": "^17.0.2",
+    "@polkadot/keyring": "^14.0.3",
+    "@polkadot/util-crypto": "^14.0.3"
+  },
+  "devDependencies": {
+    "@flop-labs/cli": "^0.7.0"
+  }
+}
