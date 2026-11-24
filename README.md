@@ -1,5 +1,7 @@
 # FLOP Agent — Agen Testnet Flop Labs (Gratis)
 
+🌐 **Website: https://daniular.github.io/flop-agent/** — landing + status live + panduan (folder `docs/`).
+
 Repo ini menyiapkan agen FLOP (Flop Labs — chain PoW tempat AI agent membayar miner
 untuk inference) untuk **testnet publik**, langkah demi langkah, **gratis saja**:
 tanpa layanan berbayar, tanpa API key berbayar, tanpa uang asli, tanpa mainnet,

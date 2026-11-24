@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>flop-agent — Agen FLOP Testnet</title>
+<meta name="description" content="Agen open-source yang membelanjakan testnet FLOP untuk inference di Flop Network. Gratis, devnet/testnet, tanpa token sungguhan.">
+<style>
+  :root{
+    --bg:#0b0e13; --panel:#12161e; --panel2:#171c27; --line:#232a38;
+    --text:#e8ecf3; --muted:#9aa4b5; --dim:#6b7688;
+    --accent:#7ee787; --warn:#f0b429; --bad:#ff7b72; --link:#79b8ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--link);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px 64px}
+  header{padding:44px 0 8px}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-size:34px;line-height:1.15;margin:10px 0 8px}
+  h1 span{color:var(--accent)}
+  .lede{color:var(--muted);font-size:17px;margin:0 0 20px}
+  .btns{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 30px}
+  .btn{display:inline-block;padding:10px 18px;border-radius:8px;font-weight:600;
+    background:var(--accent);color:#06130a}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:20px 22px;margin:0 0 22px}
+  .card h2{margin:0 0 12px;font-size:19px}
+  .card h2 small{color:var(--dim);font-weight:400;font-size:13px}
+  .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:700;
+    background:#3a2a00;color:var(--warn);border:1px solid #6b5312}
+  .badge.live{background:#0d2b12;color:var(--accent);border-color:#1d5c2a}
+  .badge.down{background:#2b1210;color:var(--bad);border-color:#5c1d18}
+  .kv{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;margin:12px 0 4px}
+  .kv dt{color:var(--muted)}
+  .kv dd{margin:0}
+  .models{list-style:none;margin:10px 0 0;padding:0}
+  .models li{padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+  .models li:first-child{border-top:0}
+  .models code{color:var(--accent);font-size:13px}
+  .note{font-size:13px;color:var(--dim);margin-top:12px}
+  .steps{counter-reset:s;list-style:none;margin:0;padding:0}
+  .steps li{counter-increment:s;position:relative;padding:0 0 18px 46px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;
+    width:30px;height:30px;border-radius:50%;background:var(--panel2);
+    border:1px solid var(--line);color:var(--accent);font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:14px}
+  .steps li:last-child{padding-bottom:0}
+  .steps b{display:block;font-size:16px}
+  .steps p{margin:2px 0 0;color:var(--muted)}
+  pre{background:#0a0d12;border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.55;margin:10px 0}
+  pre code{color:#c9d1d9}
+  pre .c{color:var(--dim)}
+  .links{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .links a{display:block;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px;color:var(--text)}
+  .links a b{display:block;font-size:15px}
+  .links a span{font-size:13px;color:var(--muted)}
+  .links a:hover{border-color:var(--accent);text-decoration:none}
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--dim);font-size:13px}
+  @media (max-width:560px){
+    h1{font-size:27px}
+    .kv{grid-template-columns:1fr;gap:0}
+    .kv dt{margin-top:8px}
+    .links{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Flop Network · Testnet</div>
+    <h1>flop-agent <span>— belanja inference, bukan cuma klaim</span></h1>
+    <p class="lede">Agen open-source yang membelanjakan testnet FLOP untuk inference di Flop Network — proyeknya Arthur Hayes (BitMEX). Airdrop dihitung dari pemakaian testnet beneran, bukan dari sekadar pegang token faucet.</p>
+    <div class="btns">
+      <a class="btn" href="https://github.com/daniular/flop-agent">Lihat repo di GitHub</a>
+      <a class="btn ghost" href="https://flop.finance">flop.finance</a>
+      <a class="btn ghost" href="https://faucet.flop.network">Faucet</a>
+    </div>
+  </header>
+
+  <section class="card" id="status">
+    <h2>Status live <small id="checked-note">· terakhir dicek 24 Nov 2026, 15:35 WIB</small></h2>
+    <p style="margin:0 0 6px">Jaringan: <span class="badge" id="net-badge">DEVNET</span>
+      <span id="net-detail" style="color:var(--muted);font-size:14px"> — testnet belum kebuka di endpoint publik</span></p>
+    <dl class="kv">
+      <dt>Faucet</dt><dd id="faucet-status">degraded · ready=false · live=true — klaim yang keluar sekarang token devnet</dd>
+      <dt>Gateway</dt><dd id="gateway-status">api.flop.network/v1 — HTTP 200</dd>
+      <dt>Model</dt><dd id="model-count">3 model, semuanya devnet</dd>
+    </dl>
+    <ul class="models" id="model-list">
+      <li>Qwen2.5 0.5B Instruct <code>(devnet-ts)</code><br><span style="color:var(--dim);font-size:13px">qwen/qwen2.5-0.5b-instruct</span></li>
+      <li>Qwen3 14B <code>(FLOP devnet)</code><br><span style="color:var(--dim);font-size:13px">qwen/qwen3-14b</span></li>
+      <li>Qwen3 Coder 30B A3B Instruct FP8 <code>(FLOP devnet)</code><br><span style="color:var(--dim);font-size:13px">qwen/qwen3-coder-30b-a3b-instruct-fp8</span></li>
+    </ul>
+    <p class="note" id="live-note">Status di atas dicek langsung dari endpoint publik FLOP. Halaman ini mencoba refresh otomatis dari browser kamu — kalau gagal, yang tampil tetap status terakhir yang terverifikasi. Cek lengkapnya: <code>npm run health</code> di repo.</p>
+  </section>
+
+  <section class="card">
+    <h2>Cara kerja</h2>
+    <ol class="steps">
+      <li><b>Bikin DID key</b><p>Di Technocore, dari browser kamu sendiri: passphrase 12+ karakter, simpan <code>identity.pem</code> — hilang = hilang permanen, nggak bisa recovery.</p></li>
+      <li><b>Klaim testnet FLOP</b><p>Dari faucet resmi pakai alamat SS58 (Polkadot.js / Talisman / SubWallet). Token devnet tidak kebawa ke testnet dan tidak dihitung.</p></li>
+      <li><b>Agen belanjain buat inference</b><p>Agen kirim request inference (model, batas latency, compute, fee) — miner ngerjain, balikin bukti, bayar pas settlement. Tugasnya apa aja bebas, yang penting ke-spend.</p></li>
+      <li><b>Yang ke-spend = klaim mainnet</b><p>Alokasi mainnet datang terkunci, kebukanya 3:1 — setiap 3 FLOP yang lo spend buat inference di mainnet, 1 FLOP kebuka.</p></li>
+    </ol>
+    <p class="note">Aturan airdrop final belum semuanya diterbitkan Flop Labs. Yang di halaman ini cuma yang sudah terverifikasi dari dokumen resmi — sisanya masih draft.</p>
+  </section>
+
+  <section class="card">
+    <h2>Jalankan sendiri <small>· gratis, tanpa biaya</small></h2>
+    <pre><code><span class="c"># clone repo</span>
+git clone https://github.com/daniular/flop-agent.git
+cd flop-agent
+npm install
+
+<span class="c"># cek status jaringan (DEVNET vs TESTNET)</span>
+npm run health
+
+<span class="c"># klaim faucet (butuh FLOP_SS58_ADDRESS di .env)</span>
+npm run faucet
+
+<span class="c"># daftar + ambil API key (butuh keystore sendiri)</span>
+npm run enroll
+
+<span class="c"># inference pertama via gateway</span>
+npm run chat
+
+<span class="c"># sesi langsung dengan miner (butuh keystore + testnet live)</span>
+npm run session</code></pre>
+    <p class="note">Agen selalu dikasih derived key dengan batas spend + expiry — owner key tidak pernah dipakai. Tidak ada seed phrase / private key yang boleh masuk repo. Detail lengkap ada di README repo.</p>
+  </section>
+
+  <section class="card">
+    <h2>Tautan</h2>
+    <div class="links">
+      <a href="https://github.com/daniular/flop-agent"><b>Repo flop-agent</b><span>Kode, script, dan README step-by-step</span></a>
+      <a href="https://faucet.flop.network"><b>Faucet FLOP</b><span>Klaim test FLOP (alamat SS58)</span></a>
+      <a href="https://flop.finance"><b>flop.finance</b><span>Situs resmi Flop Labs</span></a>
+      <a href="https://ask.flop.finance/docs/testnet-and-timeline"><b>Dokumen resmi</b><span>FAQ testnet &amp; timeline</span></a>
+      <a href="https://technocore-start.vercel.app"><b>Technocore</b><span>Bikin DID key (6 langkah)</span></a>
+      <a href="https://api.flop.network/v1/models"><b>Model gateway</b><span>Daftar model live (tanpa key)</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <p>flop-agent adalah proyek komunitas, bukan produk resmi Flop Labs. Belum ada token $FLOP — TGE/mainnet ditargetkan Q1 2027. Penjualan, klaim, atau presale $FLOP sekarang = scam. Semua status di halaman ini diverifikasi dari endpoint publik; tidak ada klaim yang dibuat-buat.</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var checkedEl = document.getElementById('checked-note');
+  var badge = document.getElementById('net-badge');
+  var detail = document.getElementById('net-detail');
+  var faucetEl = document.getElementById('faucet-status');
+  var gatewayEl = document.getElementById('gateway-status');
+  var countEl = document.getElementById('model-count');
+  var listEl = document.getElementById('model-list');
+  var noteEl = document.getElementById('live-note');
+
+  function fmtTime(d){
+    try{
+      return d.toLocaleString('id-ID',{timeZone:'Asia/Jakarta',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) + ' WIB';
+    }catch(e){ return d.toISOString(); }
+  }
+
+  Promise.all([
+    fetch('https://api.flop.network/v1/models').then(function(r){ if(!r.ok) throw new Error('models '+r.status); return r.json(); }).catch(function(){ return null; }),
+    fetch('https://faucet.flop.network/chain').then(function(r){ if(!r.ok) throw new Error('chain '+r.status); return r.json(); }).catch(function(){ return null; }),
+    fetch('https://faucet.flop.network/health').then(function(r){ if(!r.ok) throw new Error('health '+r.status); return r.json(); }).catch(function(){ return null; })
+  ]).then(function(res){
+    var models = res[0], chain = res[1], health = res[2];
+    if(!models && !chain && !health) return; // keep baked-in values
+    var now = new Date();
+    checkedEl.textContent = '· terakhir dicek ' + fmtTime(now) + ' (live dari browser)';
+    if(chain && chain.network){
+      var net = String(chain.network).toUpperCase();
+      badge.textContent = net;
+      if(net === 'TESTNET'){
+        badge.className = 'badge live';
+        detail.textContent = ' — testnet sudah live di endpoint publik';
+      } else if(net === 'DEVNET'){
+        badge.className = 'badge';
+        detail.textContent = ' — testnet belum kebuka di endpoint publik';
+      } else {
+        badge.className = 'badge down';
+        detail.textContent = '';
+      }
+    }
+    if(health){
+      var h = 'status=' + (health.status || '?') + ' · ready=' + health.ready + ' · live=' + health.live;
+      faucetEl.textContent = h + (health.ready === false ? ' — klaim yang keluar sekarang token devnet' : '');
+    }
+    if(models && models.data){
+      var devnet = models.data.filter(function(m){ return (m.name||'').toLowerCase().indexOf('devnet') !== -1; }).length;
+      gatewayEl.textContent = 'api.flop.network/v1 — HTTP 200';
+      countEl.textContent = models.data.length + ' model, ' + (devnet === models.data.length ? 'semuanya devnet' : devnet + ' devnet');
+      listEl.innerHTML = models.data.map(function(m){
+        var label = (m.name||'').indexOf('(') !== -1 ? (m.name||'').match(/\([^)]*\)/) : null;
+        return '<li>' + (m.name||m.id) + (label ? ' <code>' + label[0] + '</code>' : '') +
+          '<br><span style="color:var(--dim);font-size:13px">' + m.id + '</span></li>';
+      }).join('');
+    }
+    noteEl.textContent = 'Status di atas baru saja dicek live dari browser kamu (' + fmtTime(now) + '). Kalau suatu saat fetch gagal, yang tampil tetap status terakhir yang terverifikasi. Cek lengkapnya: npm run health di repo.';
+  });
+})();
+</script>
+</body>
+</html>
