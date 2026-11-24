@@ -18,3 +18,4 @@ npm-debug.log*
 state/
 *.log
 .DS_Store
+agent-keystore.json
