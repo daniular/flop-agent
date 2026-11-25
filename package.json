@@ -11,6 +11,7 @@
     "health": "node scripts/health.mjs",
     "enroll": "node scripts/enroll.mjs",
     "faucet": "node scripts/faucet.mjs",
+    "claim-testnet": "node scripts/claim-testnet.mjs",
     "chat": "node scripts/chat.mjs",
     "session": "node scripts/session.mjs"
   },
